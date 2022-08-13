@@ -1,0 +1,6 @@
+[28-Jun-2022 17:00:05 UTC] PHP Warning:  mysqli_connect(): (HY000/1040): Too many connections in /home/itservtc/booking.itservtc.com/config.php on line 6
+[28-Jun-2022 17:00:05 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, bool given in /home/itservtc/booking.itservtc.com/admin/auto/autoSuggestRoute.php:3
+Stack trace:
+#0 /home/itservtc/booking.itservtc.com/admin/auto/autoSuggestRoute.php(3): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/itservtc/booking.itservtc.com/admin/auto/autoSuggestRoute.php on line 3

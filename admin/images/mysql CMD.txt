@@ -1,0 +1,98 @@
+====================================
+1.
+====================================
+
+create table Employe(
+	->empid int primary key auto_increment,
+	->name varchar(50),
+	->phone int,
+	->dept varchar(5)
+	->);
+====================================
+2.
+====================================
+create table salary(
+	->sid int primary key auto_increment,
+	->salary_month varchar(50),
+	->mobile int,
+	->ammount int,
+	->empid int
+	->);
+
+====================================
+3. Insert ROW with Procedure
+===================================
+
+Create PROCEDURE insertData(ID int,Name varchar(50), Phone INT, Dept Varchar(5))
+BEGIN
+INSERT INTO `employe`(`empid`, `name`, `phone`, `dept`) VALUES ('ID','Name','Phone','Dept');
+END
+//
+
+===================================
+3. Delete ROW with Procedure
+===================================
+
+Create PROCEDURE deleteData(ID int)
+BEGIN
+DELETE FROM `employe` WHERE empid=ID;
+END
+//
+
+===================================
+3. Update ROW with Procedure
+===================================
+Create PROCEDURE updateData(Name varchar(50), Phone INT, Dept Varchar(5), ID int)
+BEGIN
+UPDATE `employe` SET `name`='Name',`phone`='Phone',`dept`='Dept' WHERE `empid`='ID';
+END
+//
+
+
+===================================
+3. Select Table with Procedure
+===================================
+Create PROCEDURE selectData()
+BEGIN
+SELECT * FROM `employe`;
+END
+//
+
+
+===================================
+4. left Join Table with View
+===================================
+
+create view student_info as
+SELECT
+student.sid as ID,
+student.name as Name,
+student.roll as Roll,
+student.class as Class,
+gardian.name as Gardian_Name,
+gardian.mobile as Mobile
+FROM
+student
+LEFT JOIN
+gardian
+ON
+student.sid=gardian.sid
+
+===================================
+5. Before Delete Save Data
+===================================
+create trigger del_triggir_stu_info(IN sid INT)
+BEGIN
+delete from student where sid=sid;
+END
+
+
+6. TRIGGER
+=================================
+CREATE TRIGGER after_UH
+AFTER UPDATE
+ON employe 
+FOR EACH ROW
+BEGIN
+INSERT INTO employe_uh(empid,name,phone,dpt)VALUES(old.empid,old.name,old.phone,old.dpt);
+END

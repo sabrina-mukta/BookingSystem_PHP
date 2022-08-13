@@ -1,0 +1,9 @@
+Home page
+dasboard-----
+1/seacrh 
+*bus name
+*time
+*amount
+*Rent
+*available seat 
+* view  seat

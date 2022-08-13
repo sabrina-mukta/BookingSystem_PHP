@@ -1,0 +1,118 @@
+<?php
+session_start ();
+require "config.php";
+if (isset($_POST['submit'])) {
+    $userName = $_POST['userName'];
+    $userPass = $_POST['userPass'];
+    $query = "select * from userTable where userName='$userName'";
+    $sql = mysqli_query($conn, $query);
+
+    while ($row=mysqli_fetch_array($sql)) {
+            $userName = $_POST['userName'];
+            $userPass = $_POST['userPass'];
+        if (($row['1'] == $userName && $row['2'] == $userPass && $row['6'] == 1 && $row['5'] == 1)) {
+            $_SESSION["login"]="1";
+            $_SESSION['userId'] = $row[0];
+            $_SESSION['userName'] = $row[1];
+            $_SESSION['userEmail']= $row[3];
+            $_SESSION['userPhone']= $row[4];
+
+            header("Location:/admin/dashboard.php");
+        }elseif (($row['1'] == $userName && $row['2'] == $userPass && $row['6'] == 1 && $row['5'] == 2)) {
+            $_SESSION["agent"]="1";
+            $_SESSION['userId'] = $row[0];
+            $_SESSION['userName'] = $row[1];
+            $_SESSION['userEmail']= $row[3];
+            $_SESSION['userPhone']= $row[4];
+
+            header("Location:/agent/dashboard.php");
+        } 
+        elseif (($row['1'] == $userName && $row['2'] == $userPass && $row['6'] == 1 && $row['5'] == 3)) {
+            $_SESSION["user"]="3";
+            $_SESSION['userId'] = $row[0];
+            $_SESSION['userName'] = $row[1];
+            $_SESSION['userEmail']= $row[3];
+            $_SESSION['userPhone']= $row[4];
+
+            header("Location:/user/dashboard.php");
+        }elseif (($row['1'] == $userName && $row['2'] == $userPass && $row['6'] != 1 && $row['5'] == 1)) {
+            echo "<center><h3 class='h3 text-danger'>Hello {$row[1]}, Your Account Is Deactivated. Please Contact Support.</h3></center>";
+        }elseif (($row['1'] == $userName && $row['2'] == $userPass && $row['6'] != 1 && $row['5'] == 2)) {
+            echo "<center><h3 class='h3 text-danger'>Hello {$row[1]}, Your Account Is Deactivated. Please Contact Support.</h3></center>";
+        } 
+        elseif (($row['1'] == $userName && $row['2'] == $userPass && $row['6'] != 1 && $row['5'] == 3)) {
+            echo "<center><h3 class='h3 text-danger'>Hello {$row[1]}, Your Account Is Deactivated. Please Contact Support.</h3></center>";
+        } 
+        
+        
+        else {
+               echo "<center><h3 class='h2 text-danger'>Enter your Username and passwod Correctly</h3></center>";
+        }
+    }
+}
+
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Section</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+        <div class="container py-6 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-10">
+                    <div class="card rounded-3 text-black">
+                        <div class="row g-0">
+                            <div class="col-lg-10">
+                                <div class="card-body p-md-5 mx-md-10">
+
+                                    <div class="text-center">
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp" style="width: 185px;" alt="logo">
+                                        <h4 class="mt-1 mb-5 pb-1">Booking System Team</h4>
+                                    </div>
+
+                                    <form action="" name="myForm" method="post" enctype="multipart/form-data">
+                                        <p>Please login to your account</p>
+
+                                        <div class="form-outline mb-5">
+                                            <input type="text" id="form2Example11" class="form-control" name="userName" placeholder="Enter your Username" />
+                                            <label class="form-label" for="form2Example11">Username</label>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input type="password" id="form2Example22" class="form-control" name="userPass" placeholder="Enter your Password" />
+                                            <label class="form-label" for="form2Example22">Password</label>
+                                        </div>
+
+                                        <div class="text-center pt-2 mb-5 pb-1">
+                                            <input class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" name="submit" value="Login" />
+                                            <a class="text-muted" href="#!">Forgot password?</a>
+                                        </div>
+
+                                        <div class="d-flex align-items-center justify-content-center pb-4">
+                                            <p class="mb-0 me-2">Don't have an account?</p>
+                                            <button type="button" class="btn btn-outline-danger">Create new</button>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
